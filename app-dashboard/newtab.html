@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>New Tab</title>
+<meta name="color-scheme" content="dark">
+<script src="launch.js"></script>
+<link rel="stylesheet" href="newtab.css">
+</head>
+<body>
+  <header class="bar">
+    <div class="when">
+      <div class="time" id="time"></div>
+      <div class="date" id="date"></div>
+    </div>
+    <nav class="links" id="links" aria-label="Apps shown as links"></nav>
+    <div class="tools">
+      <button class="btn" id="addBtn" type="button">+ Add app</button>
+      <button class="btn ghost" id="editBtn" type="button" aria-pressed="false">Edit</button>
+      <button class="btn ghost icon" id="settingsBtn" type="button" title="Layout, export and import" aria-label="Settings">⚙</button>
+    </div>
+  </header>
+
+  <main class="grid" id="grid"></main>
+
+  <section class="empty" id="empty" hidden>
+    <h1>Your dashboard is empty</h1>
+    <p>Add the apps you use. Sites that allow it are shown live on this page; the rest become links at the top.</p>
+    <button class="btn" id="emptyAdd" type="button">+ Add your first app</button>
+  </section>
+
+  <!-- Add / edit an app -->
+  <dialog id="appDlg">
+    <form method="dialog" id="appForm">
+      <h2 id="appDlgTitle">Add app</h2>
+      <label>Address
+        <input name="url" type="text" placeholder="https://calendar.example.com" required autocomplete="off" spellcheck="false">
+      </label>
+      <label>Name
+        <input name="name" type="text" placeholder="Taken from the address if left empty" autocomplete="off">
+      </label>
+      <fieldset class="modes">
+        <legend>Show it as</legend>
+        <label class="mode"><input type="radio" name="mode" value="auto" checked>
+          <span><b>Auto</b> Embedded if the site allows it, otherwise a link.</span></label>
+        <label class="mode"><input type="radio" name="mode" value="embed">
+          <span><b>Embed</b> Always embedded. If the site blocks embedding, the dashboard lifts the block for this page only.</span></label>
+        <label class="mode"><input type="radio" name="mode" value="link">
+          <span><b>Link</b> A button at the top.</span></label>
+      </fieldset>
+      <div class="sizes">
+        <label>Width
+          <select name="w"><option value="1">1 column</option><option value="2">2 columns</option><option value="3">3 columns</option><option value="4">4 columns</option><option value="6">Full width</option></select>
+        </label>
+        <label>Height
+          <select name="h"><option value="1">1 row</option><option value="2">2 rows</option><option value="3">3 rows</option></select>
+        </label>
+      </div>
+      <p class="status" id="appStatus"></p>
+      <div class="actions">
+        <!-- Save comes first so Enter saves; CSS puts it last -->
+        <button class="btn last" id="saveBtn" value="save" type="submit">Save</button>
+        <button class="btn ghost danger" id="removeBtn" type="button" hidden>Remove</button>
+        <span class="spacer"></span>
+        <button class="btn ghost" value="cancel" formnovalidate type="submit">Cancel</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Settings -->
+  <dialog id="setDlg">
+    <form method="dialog" id="setForm">
+      <h2>Layout</h2>
+      <div class="sizes">
+        <label>Columns
+          <select name="cols"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+        </label>
+        <label>Row height
+          <select name="rowH"><option value="240">Short</option><option value="320">Medium</option><option value="420">Tall</option><option value="560">Very tall</option></select>
+        </label>
+      </div>
+      <label class="check"><input type="checkbox" name="clock"> Show the time and date</label>
+      <h2>New tab</h2>
+      <label>When I open a new tab
+        <select name="launch" id="launchSel"><option value="">Show this dashboard</option></select>
+      </label>
+      <p class="hint">An app chosen here opens full size on every new tab. To come back to the dashboard, click the App Dashboard button in the toolbar.</p>
+      <h2>Back up</h2>
+      <p class="hint">Your apps are saved in your browser profile and follow you to other computers where you're signed in to the browser.</p>
+      <div class="actions left">
+        <button class="btn ghost" id="exportBtn" type="button">Export…</button>
+        <button class="btn ghost" id="importBtn" type="button">Import…</button>
+        <input type="file" id="importFile" accept="application/json,.json" hidden>
+      </div>
+      <p class="status" id="setStatus"></p>
+      <div class="actions">
+        <button class="btn last" value="save" type="submit">Save</button>
+        <span class="spacer"></span>
+        <button class="btn ghost" value="cancel" type="submit">Cancel</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="rules.js"></script>
+  <script src="newtab.js"></script>
+</body>
+</html>

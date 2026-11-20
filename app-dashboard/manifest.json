@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "App Dashboard",
+  "version": "1.1.1",
+  "description": "A new tab page with the apps you choose: embedded where the site allows it, or as links.",
+  "minimum_chrome_version": "116",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions": [
+    "alarms",
+    "declarativeNetRequest",
+    "favicon",
+    "storage"
+  ],
+  "optional_host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ],
+  "action": {
+    "default_title": "Open the dashboard",
+    "default_icon": {
+      "16": "icon16.png",
+      "32": "icon32.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
